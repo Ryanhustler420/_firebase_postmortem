@@ -25,8 +25,10 @@ export class AboutComponent implements OnInit {
 
   ngOnInit() {
     this.db.collection('courses')
-    .snapshotChanges()
+    .stateChanges()
     .subscribe(snaps => {
+      console.log(snaps);
+      /*
       const courses: Course[] = snaps.map(snap => {
         return <Course> {
           id: snap.payload.doc.id,
@@ -35,6 +37,7 @@ export class AboutComponent implements OnInit {
       });
 
       console.log(courses);
+      */
     });
   }
 
