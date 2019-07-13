@@ -37,7 +37,16 @@ export class CoursesService {
     // )
 
     return this.db.collection('courses', ref =>
-      ref.orderBy('seqNo')
+      ref
+        .where('seqNo', '==', 5)
+        .where('lessonsCount', '>=', 5)
+        // this quere requires an inedx. so gives an error along with a link
+
+        // https://console.firebase.google.com/project/fir-scratch-board/database/firestore/indexes?create_
+        // composite=ClFwcm9qZWN0cy9maXItc2NyYXRjaC1ib2FyZC9kYXRhYmFzZXMvKGRlZmF1
+        // bHQpL2NvbGxlY3Rpb25Hcm91cHMvY291cnNlcy9pbmRleGVzL18QARoJCgVzZXFObxABGhAKDGxlc3NvbnNDb3VudBABGgwKCF9fbmFtZV9fEAE
+
+        // grab this link and create an index
     )
 
     .snapshotChanges()
