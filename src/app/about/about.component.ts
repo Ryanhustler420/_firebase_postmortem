@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 
 const config = {
@@ -19,10 +20,10 @@ const config = {
 })
 export class AboutComponent implements OnInit {
 
-  constructor() { }
+  constructor(private db: AngularFirestore) { }
 
   ngOnInit() {
-
+    this.db.collection('courses').valueChanges().subscribe(val => console.log(val));
   }
 
 }
