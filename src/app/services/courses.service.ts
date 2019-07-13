@@ -37,9 +37,7 @@ export class CoursesService {
     // )
 
     return this.db.collection('courses', ref =>
-      ref
-        .where('seqNo', '==', 5)
-        .where('lessonsCount', '>=', 5)
+      ref.orderBy('seqNo')
         // this quere requires an inedx. so gives an error along with a link
 
         // https://console.firebase.google.com/project/fir-scratch-board/database/firestore/indexes?create_
@@ -48,6 +46,19 @@ export class CoursesService {
 
         // grab this link and create an index
     )
+
+    // throw an error because its not possible by the indexing order
+    // return this.db.collection('courses', ref =>
+    //   ref
+    //     .where('seqNo', '>=', 5)
+    //     .where('lessonsCount', '>=', 10)
+
+    // this is also not valid. for this to work we have to make
+    // index lessionCount and seqNo instead of seqNo and lessionCount.
+    //     .where('seqNo', '>=', 5)
+    //     .where('lessonsCount', '==', 10)
+
+    // )
 
     .snapshotChanges()
       .pipe(
