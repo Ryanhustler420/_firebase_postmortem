@@ -40,3 +40,10 @@ firebase.initializeApp(firebaseConfig);
 5. run this ``npm run init-db``
 6. check database in your firebase console
 7. ng serve
+
+
+## generate service
+
+``
+ng g service services/courses
+``

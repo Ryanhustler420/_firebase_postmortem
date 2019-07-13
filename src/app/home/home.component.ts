@@ -4,7 +4,6 @@ import {Observable} from "rxjs";
 import {map} from "rxjs/operators";
 
 
-
 @Component({
     selector: 'home',
     templateUrl: './home.component.html',
