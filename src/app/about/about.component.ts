@@ -2,6 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 
 import * as firebase from 'firebase/app';
 import 'firebase/firestore';
+import { Course } from '../model/course';
 
 const config = {
   apiKey: "AIzaSyCcAvM_lC8amyB4m_K5zjcf5b7b-IEr_CA",
@@ -35,9 +36,16 @@ export class AboutComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    db.doc('courses/9PgriYBTRB5SHss6KbGV')
-      .get()
-      .then(snap => console.log(snap.data()));
+    db.collection('courses').get()
+      .then(snaps => {
+        const courses: Course[] = snaps.docs.map(snap => {
+          return <Course>{
+            id: snap.id,
+            ...snap.data()
+          };
+        });
+        console.log(courses);
+      });
   }
 
 }
