@@ -3,6 +3,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { map, first, take } from 'rxjs/operators';
 import { Course } from '../model/course';
 import { Observable } from 'rxjs';
+import { convertSnaps } from './db-utils';
 
 
 @Injectable({
@@ -63,16 +64,21 @@ export class CoursesService {
     .snapshotChanges()
       .pipe(
         map((snaps) => {
-          return snaps.map(snap => {
-            return <Course> {
-              id: snap.payload.doc.id,
-              ...snap.payload.doc.data()
-            };
-          });
+          return convertSnaps<Course>(snaps);
           // first will prevent real time data update.
       }),
         first(),
       // take()
       );
   }
-}
+
+  findCourseByUrl(courseUrl: string): Observable<Course> {
+    return this.db.collection('courses',
+        ref => ref.where('url', '==', courseUrl))
+        .snapshotChanges()
+        .pipe(map(snaps => {
+          const courses = convertSnaps<Course>(snaps);
+          return courses.length === 1 ? courses[0] : undefined;
+        }), first());
+    }
+  }
