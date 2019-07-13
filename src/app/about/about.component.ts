@@ -21,24 +21,10 @@ const config = {
 })
 export class AboutComponent implements OnInit {
 
-  constructor(private db: AngularFirestore) { }
+  constructor() { }
 
   ngOnInit() {
-    this.db.collection('courses')
-    .stateChanges()
-    .subscribe(snaps => {
-      console.log(snaps);
-      /*
-      const courses: Course[] = snaps.map(snap => {
-        return <Course> {
-          id: snap.payload.doc.id,
-          ...snap.payload.doc.data()
-        };
-      });
 
-      console.log(courses);
-      */
-    });
   }
 
 }
