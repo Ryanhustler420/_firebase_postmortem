@@ -50,4 +50,29 @@ export class AboutComponent implements OnInit {
     batch$.subscribe();
   }
 
+  async runTransaction() {
+    const newCounter = await this.db.firestore.runTransaction(async transaction => {
+      console.log('Runnig transaction...');
+      const courseRef = this.db.doc('/courses/9PgriYBTRB5SHss6KbGV').ref;
+      const snap = await transaction.get(courseRef);
+      const course = <Course> snap.data();
+      // the idea is that when this transaction is running
+      // no concurrent request will modify the data.
+      // so, you have a snapshop of the data
+
+      const lessonsCount = course.lessonsCount + 1;
+      transaction.update(courseRef, {lessonsCount});
+
+      // you sould return value if you want to, but dont declare lessonsCount
+      // variable outside the function! BAD PRACTICE
+      return lessonsCount;
+
+      // NOTE:- never modify any component variables using this transaction
+      // never!
+    });
+
+    console.log('Result lessons count = ', newCounter);
+
+  }
+
 }
