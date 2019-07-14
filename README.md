@@ -56,3 +56,8 @@ and than paste the full path of any other document. example:
 `/courses/2LVjB3tcSVQ8iYD5pkID`. now copy the path of the document where you inserted the reference. example: `/courses/5SceXGmXKGV757Glmlzs`
 and make a request in the client side.
 ``
+
+
+##### Authentication
+
+> Enable Email/Password in sign-in method tab
