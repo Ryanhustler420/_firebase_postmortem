@@ -72,8 +72,7 @@ import { LoginComponent } from './login/login.component';
         ReactiveFormsModule,
         AngularFireModule.initializeApp(environment.firebase),
         AngularFireAuthModule,
-        // offline feature enabled
-        AngularFirestoreModule.enablePersistence(),
+        AngularFirestoreModule,
         AngularFireStorageModule
     ],
     providers: [
