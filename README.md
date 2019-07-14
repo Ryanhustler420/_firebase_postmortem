@@ -47,3 +47,12 @@ firebase.initializeApp(firebaseConfig);
 ``
 ng g service services/courses
 ``
+
+##### Firestore Persistent Document Reference
+
+``
+Create A New Field In Any Document And Set Type to `reference`.
+and than paste the full path of any other document. example: 
+`/courses/2LVjB3tcSVQ8iYD5pkID`. now copy the path of the document where you inserted the reference. example: `/courses/5SceXGmXKGV757Glmlzs`
+and make a request in the client side.
+``
