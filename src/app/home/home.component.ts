@@ -22,12 +22,13 @@ export class HomeComponent implements OnInit {
     }
 
     ngOnInit() {
-
-      this.courses$ = this.coursesService.loadAllCourses();
-
-
-      this.beginnersCourses$ = this.courses$.pipe(map((coursese) => coursese.filter(course => course.categories.includes("BEGINNER"))));
-      this.advancedCourses$ = this.courses$.pipe(map((coursese) => coursese.filter(course => course.categories.includes("ADVANCED"))));
+      this.reloadCourses();
     }
 
+    reloadCourses() {
+      console.log('trigger');
+      this.courses$ = this.coursesService.loadAllCourses();
+      this.beginnersCourses$ = this.courses$.pipe(map((coursese) => coursese.filter(course => course.categories.includes('BEGINNER'))));
+      this.advancedCourses$ = this.courses$.pipe(map((coursese) => coursese.filter(course => course.categories.includes('ADVANCED'))));
+    }
 }
